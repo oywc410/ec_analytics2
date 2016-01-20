@@ -5,7 +5,8 @@ import (
 	"os"
 	"log"
 	"runtime/pprof"
-	"bufio"
+	"io"
+	"fmt"
 )
 
 var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
@@ -36,12 +37,31 @@ func main() {
 		}
 	}
 
-	gofile, _ := os.Open("test.tmp2")
-	defer gofile.Close()
+	fi,err := os.Open("ec_analytics2.test.exe")
+	if err != nil{
+		panic(err)
+	}
+	defer fi.Close()
 
-	b := bufio.NewScanner(gofile)
-	for b.Scan() {
 
+
+	buf := make([]byte,1024)
+
+	tt := make([]int, 10000000)
+	i := 0
+	for {
+		if i == 100 {
+			break
+		}
+		tt[i] = i
+		i++
+	}
+fmt.Println(i)
+
+	for{
+		n,err := fi.Read(buf)
+		if err != nil && err != io.EOF{panic(err)}
+		if 0 ==n {break}
 	}
 
 }
