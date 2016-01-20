@@ -1,0 +1,6 @@
+.idea
+test.tmp
+test.tmp2
+*.exe
+*.prof
+ec_analytics2.iml
